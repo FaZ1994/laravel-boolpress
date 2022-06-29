@@ -1,48 +1,27 @@
 @extends('layouts.admin')
 
-
-{{-- @dump($post)
-@dump($categories) --}}
-
 @section('content')
+    <section class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Modifica categoria</div>
 
+                    <div class="card-body">
+                        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="{{ old('name', $category->name) }}" placeholder="Insert name">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
 
-<form action="{{route('admin.posts.update', $post->id)}}" method="post">
-    @csrf
-    @method('PUT')
-    
-    <div class="mb-3">
-            <label for="title" class="form-label">title</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{old('title',$post->title)}}" placeholder="inserisci titolo">
-    </div>
-    
-    <div class="mb-3">
-        <label for="content" class="form-label">content</label>
-        <textarea name="content" id="content"  cols="30" rows="10">{{old('content',$post->content)}}</textarea>
-    </div>
-
-    <div class="mb-3">
-        <label for="content" class="form-label">category</label>
-          <select name="category_id" id="category_id" class="form-control">
-            <option value="">select category</option>
-            @foreach ($categories as $category)
-                <option value="{{old($category->id)}}" {{$category->id == old('category_id',$post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
-                
-            @endforeach
-
-
-        </select>
-    </div>
-
-
-    <div class="mb-3 form-check">
-        <input type="checkbox" {{old('published',$post->published) ? 'checked' : ''}} class="form-check-input" id="published" name="published">
-        <label class="form-check-label" for="published">Pubblicato</label>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-
-    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

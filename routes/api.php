@@ -19,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/posts', 'Api\PostController@index');
 Route::get('/posts/{slug}', 'Api\PostController@show');
+
+// rotta per salvare i commenti ai post
+Route::post('/comments', 'Api\CommentController@store');
+
